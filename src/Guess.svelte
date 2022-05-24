@@ -18,6 +18,7 @@
     
     async function onWordSubmit(e) {
         const word = e.target.word.value;
+        e.target.word.value = '';
 
         if (word === "") {
             return;
