@@ -83,3 +83,11 @@ body {
   padding-inline: 3em;
   padding-block: 1em;
 }
+
+a {
+  color: #ffaa00;
+  text-decoration: none;
+}
+a:hover {
+  color: #ffcc66;
+}
