@@ -15,4 +15,8 @@
 <Footer />
 
 <style>
+	main {
+		display: grid;
+		gap: 2em;
+	}
 </style>
