@@ -69,9 +69,16 @@
         flex: 1;
     }
     .guessField {
+        font-size: 1.5rem;
         width: 85%;
     }
     .guessButton {
         width: 14%;
+        font-size: 1.25rem;
+        background-color: #666666;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 0.5rem;
     }
 </style>
