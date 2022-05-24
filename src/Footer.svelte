@@ -5,7 +5,7 @@
 
 <style>
 	footer {
-		place-self: center;
+		align-self: end;
         text-align: center;
 	}
 </style>
