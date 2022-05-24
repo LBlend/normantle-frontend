@@ -43,10 +43,10 @@
     }
 </script>
 
-<div>
-    <form on:submit|preventDefault={onWordSubmit}>
-        <input type="text" id="word" name="ord">
-        <input type="submit" value="Gjett">
+<div id="guess">
+    <form class="guessForm" on:submit|preventDefault={onWordSubmit}>
+        <input class="guessField" type="text" id="word" name="ord">
+        <input class="guessButton" type="submit" value="Gjett">
     </form>
     <Result />
     {#if hasGuessed}
@@ -61,5 +61,17 @@
 
 
 <style>
-
+    #guess {
+        width: 100%;
+        display: flex;
+    }
+    .guessForm {
+        flex: 1;
+    }
+    .guessField {
+        width: 85%;
+    }
+    .guessButton {
+        width: 14%;
+    }
 </style>
