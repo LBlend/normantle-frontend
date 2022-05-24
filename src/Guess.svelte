@@ -45,11 +45,11 @@
         <input type="submit" value="Gjett">
     </form>
     <Result />
-    <form>
+    <form on:submit|preventDefault={onHintSubmit}>
         <input type="submit" value="Hint">
     </form>
     {#if hasGuessed}
-    <form>
+    <form on:submit|preventDefault={onSurrender}>
         <input type="submit" value="Gi opp">
     </form>
     {/if}
