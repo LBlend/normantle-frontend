@@ -6,7 +6,7 @@
 </script>
 
 <div>
-    <p>Dagens ord er #{puzzleNumber}. Det nærmeste ordet har en likhetsgrad på {similarity}. Det tiende nærmeste har en likhetsgrad på {similarityTenth} og det tusende nærmeste ordet har en likhetsgrad på {similarityThousandth}.</p>
+    <p>Dagens ord er <b>#{puzzleNumber}</b>. Det nærmeste ordet har en likhetsgrad på <b>{similarity}</b>. Det tiende nærmeste har en likhetsgrad på <b>{similarityTenth}</b> og det tusende nærmeste ordet har en likhetsgrad på <b>{similarityThousandth}</b>.</p>
 </div>
 
 <style>
