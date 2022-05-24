@@ -20,8 +20,11 @@
 </table>
 
 <style>
-    td {
-        text-align: center;
+    td, th {
         padding: 1rem;
+    }
+    th {
+        border-bottom: 2px solid white;
+        text-align: left;
     }
 </style>
