@@ -40,7 +40,7 @@
 </script>
 
 <div>
-    <form>
+    <form on:submit|preventDefault={onWordSubmit}>
         <input type="text" id="word" name="ord">
         <input type="submit" value="Gjett">
     </form>
