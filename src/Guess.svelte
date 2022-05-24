@@ -45,7 +45,7 @@
 
 <div id="guess">
     <form class="guessForm" on:submit|preventDefault={onWordSubmit}>
-        <input class="guessField" type="text" id="word" name="ord">
+        <input class="guessField" type="text" id="word" name="ord" placeholder="Gjett">
         <input class="guessButton" type="submit" value="Gjett">
     </form>
     <Result />
