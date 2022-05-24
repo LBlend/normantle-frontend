@@ -9,6 +9,10 @@
         const form = new FormData(e.target);
         const word = form.get("word");
 
+        if (word === "") {
+            return;
+        }
+
         const response = await fetch("/guess", {
             method: "POST",
             headers: {
