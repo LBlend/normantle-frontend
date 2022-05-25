@@ -82,18 +82,20 @@
 
     <form class="guessForm" on:submit|preventDefault={onWordSubmit}>
         <input class="guessField" type="text" id="word" name="ord" placeholder="Gjett">
-        <input class="guessButton" type="submit" value="Gjett">
+        <input class="submitButton guessButton" type="submit" value="Gjett">
     </form>
 
     <Result bind:guesses />
 
     {#if hasGuessed}
-    <form on:submit|preventDefault={onHintSubmit}>
-        <input type="submit" value="Hint">
-    </form>
-    <form on:submit|preventDefault={onSurrender}>
-        <input type="submit" value="Gi opp">
-    </form>
+    <div id="hintSurrender">
+        <form on:submit|preventDefault={onHintSubmit}>
+            <input class="submitButton" type="submit" value="Hint">
+        </form>
+        <form on:submit|preventDefault={onSurrender}>
+            <input class="submitButton" type="submit" value="Gi opp">
+        </form>
+    </div>
     {/if}
 </div>
 
@@ -111,19 +113,25 @@
         font-size: 1.5rem;
         width: 85%;
     }
-    .guessButton {
-        flex: 1;
-        font-size: 1.25rem;
+    .submitButton {
         background-color: #666666;
         color: #fff;
         border-radius: 4px;
         cursor: pointer;
-        padding: 0.5eem;
+        padding: 0.5em;
+    }
+    .guessButton {
+        flex: 1;
+        font-size: 1.25rem;
     }
     .error {
         background-color: rgb(245, 110, 110);
         padding: 1em;
         border: red solid 2px;
         color: black;
+    }
+    #hintSurrender {
+        display: flex;
+        gap: .5rem;
     }
 </style>
