@@ -37,8 +37,8 @@
 
         if (response.ok) {
             const guessResponse: GuessResult = await response.json();
-            hasGuessed = true;
             console.log("OK!", guessResponse);
+            hasGuessed = true;
             const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
             guesses = [guessResult, ...guesses];
         } else {
@@ -95,6 +95,6 @@
         color: #fff;
         border-radius: 4px;
         cursor: pointer;
-        padding: 0.5em;
+        padding: 0.5eem;
     }
 </style>
