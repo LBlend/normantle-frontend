@@ -8,6 +8,7 @@
     let puzzleNumber = 420;
 
     let guesses = [];
+    let errorMessage = "";
 
     interface GuessResult {
         word: string;
@@ -17,11 +18,16 @@
     }
     
     async function onWordSubmit(e) {
+        errorMessage = "";
+
         const word = e.target.word.value;
         e.target.word.value = '';
 
         if (word === "") {
             return;
+        }
+        if (word in guesses) {
+            errorMessage = "Du har allerede gjettet dette ordet!";
         }
 
         const response = await fetch(`${apiRoot}/guess`, {
@@ -43,7 +49,7 @@
             guesses = [guessResult, ...guesses];
         } else {
             console.log("NOT OK!", response);
-            // TODO: show error message
+            errorMessage = "Noe gikk galt! Prøv igjen senere";
         }
     }
 
@@ -57,6 +63,10 @@
 </script>
 
 <div id="guess">
+    {#if errorMessage}
+        <p class="error">{errorMessage}</p>
+    {/if}
+
     <form class="guessForm" on:submit|preventDefault={onWordSubmit}>
         <input class="guessField" type="text" id="word" name="ord" placeholder="Gjett">
         <input class="guessButton" type="submit" value="Gjett">
@@ -96,5 +106,11 @@
         border-radius: 4px;
         cursor: pointer;
         padding: 0.5eem;
+    }
+    .error {
+        background-color: rgb(245, 110, 110);
+        padding: 1em;
+        border: red solid 2px;
+        color: black;
     }
 </style>
