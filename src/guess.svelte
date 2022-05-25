@@ -5,6 +5,7 @@
     let apiRoot = "http://127.0.0.1:8000";  // TODO: move to .env
 
     let hasGuessed = false;
+    let hasCompleted = false;
     let puzzleNumber = 420;
 
     let guesses = [];
@@ -54,7 +55,7 @@
     }
 
     async function onHintSubmit() {
-
+        // add 💡 to word
     }
 
     async function onSurrender() {
