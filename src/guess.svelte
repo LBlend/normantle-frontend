@@ -54,11 +54,24 @@
     }
 
     async function onHintSubmit() {
-        // TODO
+
     }
 
     async function onSurrender() {
-        // TODO
+        const response = await fetch(`${apiRoot}/surrender?puzzle=${puzzleNumber}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+
+        if (response.ok) {
+            const guessResponse: GuessResult = await response.json();
+            const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
+            guesses = [guessResult, ...guesses];
+        } else {
+            errorMessage = "Noe gikk galt! Prøv igjen senere";
+        }
     }
 </script>
 
