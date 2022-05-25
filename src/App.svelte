@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Header from "./Header.svelte";
 	import TodayInfo from "./TodayInfo.svelte";
-	import Guess from "./Guess.svelte";
+	import Guess from "./guess.svelte";
 	import Faq from "./Faq.svelte";
 	import Footer from './Footer.svelte';
 </script>
