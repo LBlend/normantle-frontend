@@ -28,8 +28,9 @@
         if (word === "") {
             return;
         }
-        if (word in guesses) {
+        if (guesses.map(guess => guess.word).includes(word)) {
             errorMessage = "Du har allerede gjettet dette ordet!";
+            return
         }
 
         const response = await fetch(`${apiRoot}/guess`, {
