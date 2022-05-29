@@ -18,6 +18,11 @@
         isCorrect: boolean;
         of_thousand: number | null;
     }
+
+    function addGuess(guess) {
+        guesses = [guess, ...guesses];
+        guesses = guesses.sort((a, b) => b.similarity - a.similarity);
+    }
     
     async function onWordSubmit(e) {
         errorMessage = "";
@@ -49,7 +54,7 @@
             console.log("OK!", guessResponse);
             hasGuessed = true;
             const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
-            guesses = [guessResult, ...guesses];
+            addGuess(guessResult);
         } else {
             console.log("NOT OK!", response);
             if (response.status === 404) {
@@ -76,7 +81,7 @@
             let hintResponse = await response.json();
             hintResponse.word = `${hintResponse.word} 💡`;
             console.log("OK!", hintResponse);
-            guesses = [hintResponse, ...guesses];
+            addGuess(hintResponse);
         } else {
             console.log("NOT OK!", response);
             errorMessage = "Noe gikk galt! Prøv igjen senere";
@@ -94,7 +99,7 @@
         if (response.ok) {
             const guessResponse: GuessResult = await response.json();
             const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
-            guesses = [guessResult, ...guesses];
+            addGuess(guessResult);
             hasCompleted = true;
         } else {
             errorMessage = "Noe gikk galt! Prøv igjen senere";
