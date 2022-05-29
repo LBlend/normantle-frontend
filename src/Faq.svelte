@@ -4,7 +4,7 @@
     <div id="questions">
         <div>
             <h3>Hva er Normantle/Semantle?</h3>
-            <p>Et enkelt ordspill der man skal gjette seg til et ord hver dag. Spillet vil fortelle deg hvor mye ordene du gjetter ligner på dagens ord i betydning. Se <a href="https://semantle.com/">Semantle</a> egne sider for mer informasjon.</p>
+            <p>Et enkelt ordspill der man skal gjette seg til et ord hver dag. Spillet vil fortelle deg hvor mye ordene du gjetter ligner på dagens ord i betydning. Se <a href="https://semantle.com/">Semantle</a> sine egne sider for mer informasjon.</p>
         </div>
 
         <div>
