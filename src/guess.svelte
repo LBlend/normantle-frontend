@@ -75,6 +75,7 @@
             const guessResponse: GuessResult = await response.json();
             const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
             guesses = [guessResult, ...guesses];
+            hasCompleted = true;
         } else {
             errorMessage = "Noe gikk galt! Prøv igjen senere";
         }
@@ -93,7 +94,7 @@
 
     <Result bind:guesses />
 
-    {#if hasGuessed}
+    {#if hasGuessed && !hasCompleted}
     <div id="hintSurrender">
         <form on:submit|preventDefault={onHintSubmit}>
             <input class="submitButton" type="submit" value="Hint">
