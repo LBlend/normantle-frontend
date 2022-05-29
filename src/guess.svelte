@@ -16,6 +16,7 @@
         similarity: number;
         isClose: boolean;
         isCorrect: boolean;
+        of_thousand: number | null;
     }
     
     async function onWordSubmit(e) {

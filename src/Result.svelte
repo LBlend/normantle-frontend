@@ -14,7 +14,11 @@
         <td>{guess.guessNumber}</td>
         <td>{guess.word}</td>
         <td>{(guess.similarity * 100).toFixed(2)}</td>
-        <td>{guess.isClose}</td>
+        {#if guess.isClose}
+            <td>{1000 - guess.of_thousand}/1000</td>
+        {:else}
+            <td>nei</td>
+        {/if}
     </tr>
     {/each}
 </table>
