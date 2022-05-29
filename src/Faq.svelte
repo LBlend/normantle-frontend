@@ -22,6 +22,9 @@
             <p>I utgangspunktet ikke, men siden dataene er litt dårlige kan man finne ord som ikke er bokmål, ikke norsk eller ord som ikke er ord i noe som helst språk engang!</p>
         </div>
 
+        <div>
+            <h3>Spillet husker ikke progresjonen min!</h3>
+            <p>Litt intensjonelt. Det finnes mange måter å "jukse" på, men du ødelegger bare for deg selv. Siden spillet er litt dårlig i sitt nåværende stadie ønsker jeg å gjøre det mest mulig lettvindt å starte på nytt.</p>
         </div>
 
         <div>
