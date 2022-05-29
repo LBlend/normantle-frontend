@@ -16,7 +16,7 @@
         similarity: number;
         isClose: boolean;
         isCorrect: boolean;
-        of_thousand: number | null;
+        ofThousand: number | null;
     }
 
     function addGuess(guess) {
@@ -55,6 +55,10 @@
             console.log("OK!", guessResponse);
             hasGuessed = true;
             addGuess(guessResponse);
+
+            if (guessResponse.isCorrect) {
+                hasCompleted = true;
+            }
         } else {
             console.log("NOT OK!", response);
             if (response.status === 404) {
@@ -82,6 +86,10 @@
             hintResponse.word = `${hintResponse.word} 💡`;
             console.log("OK!", hintResponse);
             addGuess(hintResponse);
+
+            if (hintResponse.isCorrect) {
+                hasCompleted = true;
+            }
         } else {
             console.log("NOT OK!", response);
             errorMessage = "Noe gikk galt! Prøv igjen senere";
