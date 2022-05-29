@@ -1,13 +1,7 @@
 <script>
-    let puzzleNumber = 0;
-    let similarity = 0;
-    let similarityTenth = 0;
-    let similarityThousandth = 0;
+    export let todayInfo;
 </script>
 
 <div>
-    <p>Dagens ord er <b>#{puzzleNumber}</b>. Det nærmeste ordet har en likhetsgrad på <b>{similarity}</b>. Det tiende nærmeste har en likhetsgrad på <b>{similarityTenth}</b> og det tusende nærmeste ordet har en likhetsgrad på <b>{similarityThousandth}</b>.</p>
+    <p>Dagens ord er <b>#{todayInfo.puzzleNumber}</b>. Det nærmeste ordet har en likhetsgrad på <b>{(todayInfo.similarity * 100).toFixed(2)}</b>. Det tiende nærmeste har en likhetsgrad på <b>{(todayInfo.similarityTenth * 100).toFixed(2)}</b> og det tusende nærmeste ordet har en likhetsgrad på <b>{(todayInfo.similarityThousandth * 100).toFixed(2)}</b>.</p>
 </div>
-
-<style>
-</style>

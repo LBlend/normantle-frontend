@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Result from "./Result.svelte";
+    import type { TodayInfoType } from "./types/TodayInfo";
     
-    //let apiRoot = "https://normantle-api.lblend.moe";  // TODO: move to .env
-    let apiRoot = "http://127.0.0.1:8000";  // TODO: move to .env
+    export let apiRoot: string;
+    export let todayInfo: TodayInfoType;
 
     let hasGuessed = false;
     let hasCompleted = false;
@@ -38,7 +39,7 @@
             },
             body: JSON.stringify({
                 word: word,
-                puzzleNumber: puzzleNumber
+                puzzleNumber: todayInfo.puzzleNumber
             })
         });
 
@@ -59,7 +60,7 @@
     }
 
     async function onSurrender() {
-        const response = await fetch(`${apiRoot}/surrender?puzzle=${puzzleNumber}`, {
+        const response = await fetch(`${apiRoot}/surrender?puzzle=${todayInfo.puzzleNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
