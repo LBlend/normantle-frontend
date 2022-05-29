@@ -73,7 +73,7 @@
             },
             body: JSON.stringify({
                 puzzleNumber: todayInfo.puzzleNumber,
-                bestGuess: guesses[0].word
+                bestGuess: guesses[0].word.split(" ")[0]
             })
         });
 
