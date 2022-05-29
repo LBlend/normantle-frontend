@@ -7,7 +7,6 @@
 
     let hasGuessed = false;
     let hasCompleted = false;
-    let puzzleNumber = 420;
 
     let guesses = [];
     let errorMessage = "";
