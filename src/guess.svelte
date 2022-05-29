@@ -51,7 +51,11 @@
             guesses = [guessResult, ...guesses];
         } else {
             console.log("NOT OK!", response);
-            errorMessage = "Noe gikk galt! Prøv igjen senere";
+            if (response.status === 404) {
+                errorMessage = "Ordet finnes ikke/er fjernet fra ordlisten";
+            } else {
+                errorMessage = "Noe gikk galt! Prøv igjen senere";
+            }
         }
     }
 
