@@ -19,7 +19,9 @@
 
         <div>
             <h3>Går det an å skrive på nynorsk?</h3>
-            <p>Nei, det går dessverre ikke. Både fordi jeg er lat og fordi jeg har et personlig vendetta mot nynorsk</p>
+            <p>I utgangspunktet ikke, men siden dataene er litt dårlige kan man finne ord som ikke er bokmål, ikke norsk eller ord som ikke er ord i noe som helst språk engang!</p>
+        </div>
+
         </div>
 
         <div>
