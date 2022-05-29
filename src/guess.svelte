@@ -97,8 +97,9 @@
         });
 
         if (response.ok) {
-            const guessResponse: GuessResult = await response.json();
-            addGuess(guessResponse);
+            let surrenderResponse: GuessResult = await response.json();
+            surrenderResponse.word = `${surrenderResponse.word} 🏳️`;
+            addGuess(surrenderResponse);
             hasCompleted = true;
         } else {
             errorMessage = "Noe gikk galt! Prøv igjen senere";
