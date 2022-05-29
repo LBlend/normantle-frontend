@@ -31,4 +31,10 @@
         border-bottom: 2px solid white;
         text-align: left;
     }
+
+    @media screen and (max-width: 600px) {
+        td, th {
+            padding: 0.5rem;
+        }
+    }
 </style>

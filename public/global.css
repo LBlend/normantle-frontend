@@ -91,3 +91,10 @@ a {
 a:hover {
   color: #ffcc66;
 }
+
+@media screen and (max-width: 600px) {
+  body {
+    padding-inline: 1em;
+    padding-block: 0.5em;
+  }
+}
