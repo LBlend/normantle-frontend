@@ -20,10 +20,11 @@
     }
 
     function addGuess(guess) {
-        guesses = [guess, ...guesses];
+        const guessResult = { ...guess, guessNumber: guesses.length + 1 }
+        guesses = [guessResult, ...guesses];
         guesses = guesses.sort((a, b) => b.similarity - a.similarity);
     }
-    
+
     async function onWordSubmit(e) {
         errorMessage = "";
 
@@ -53,8 +54,7 @@
             const guessResponse: GuessResult = await response.json();
             console.log("OK!", guessResponse);
             hasGuessed = true;
-            const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
-            addGuess(guessResult);
+            addGuess(guessResponse);
         } else {
             console.log("NOT OK!", response);
             if (response.status === 404) {
@@ -98,8 +98,7 @@
 
         if (response.ok) {
             const guessResponse: GuessResult = await response.json();
-            const guessResult = { ...guessResponse, guessNumber: guesses.length + 1 };
-            addGuess(guessResult);
+            addGuess(guessResponse);
             hasCompleted = true;
         } else {
             errorMessage = "Noe gikk galt! Prøv igjen senere";
