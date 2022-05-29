@@ -22,7 +22,7 @@
     async function onWordSubmit(e) {
         errorMessage = "";
 
-        const word = e.target.word.value;
+        const word = e.target.word.value.toLowerCase();
         e.target.word.value = '';
 
         if (word === "") {
