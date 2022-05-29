@@ -60,7 +60,26 @@
     }
 
     async function onHintSubmit() {
-        // add 💡 to word
+        const response = await fetch(`${apiRoot}/hint`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                puzzleNumber: todayInfo.puzzleNumber,
+                bestGuess: guesses[0].word
+            })
+        });
+
+        if (response.ok) {
+            let hintResponse = await response.json();
+            hintResponse.word = `${hintResponse.word} 💡`;
+            console.log("OK!", hintResponse);
+            guesses = [hintResponse, ...guesses];
+        } else {
+            console.log("NOT OK!", response);
+            errorMessage = "Noe gikk galt! Prøv igjen senere";
+        }
     }
 
     async function onSurrender() {
@@ -115,6 +134,7 @@
     .guessForm {
         width: 100%;
         display: flex;
+        gap: .5rem;
     }
     .guessField {
         font-size: 1.5rem;
