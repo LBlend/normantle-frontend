@@ -98,7 +98,7 @@
 
         if (response.ok) {
             let surrenderResponse: GuessResult = await response.json();
-            surrenderResponse.word = `${surrenderResponse.word} 🏳️`;
+            surrenderResponse.word = `${surrenderResponse.word} 🏳️🇫🇷`;
             addGuess(surrenderResponse);
             hasCompleted = true;
         } else {
