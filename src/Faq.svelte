@@ -13,6 +13,11 @@
         </div>
 
         <div>
+            <h3>Hva er grensen for at et ord blir godkjent som "riktig"?</h3>
+            <p>Med likhetsgrad på over høyere enn 90 vil du få godkjent ordet. Dette kan i noen tilfeller være et ord som ikke har samme semantisk betydning, men siden modellen brukt til å regne ut likhet er litt svak vil ord som er semantisk like ofte ikke nå over denne grensen heller.</p>
+        </div>
+
+        <div>
             <h3>Går det an å skrive på nynorsk?</h3>
             <p>Nei, det går dessverre ikke. Både fordi jeg er lat og fordi jeg har et personlig vendetta mot nynorsk</p>
         </div>
