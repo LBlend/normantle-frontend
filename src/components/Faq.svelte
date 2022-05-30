@@ -14,7 +14,7 @@
 
     <div>
       <h3>Når resettes klokka?</h3>
-      <p>Klokken 00:00 norsk tid</p>
+      <p>Klokken 00:00 norsk tid (+ 1 minutt slingringmonn)</p>
     </div>
 
     <div>
