@@ -15,7 +15,7 @@
     let guesses = [];
     let errorMessage = "";
 
-    function addGuess(guess) {
+    function addGuess(guess: GuessResult) {
         const guessResult = { ...guess, guessNumber: guesses.length + 1 }
         guesses = [guessResult, ...guesses];
         guesses = guesses.sort((a, b) => b.similarity - a.similarity);
