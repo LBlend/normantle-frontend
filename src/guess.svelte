@@ -94,6 +94,8 @@
   }
 
   async function onSurrender() {
+    errorMessage = ""; // Clear any remaining error messages
+
     const response = await fetch(
       `${apiRoot}/surrender?puzzle=${todayInfo.puzzleNumber}`,
       {
