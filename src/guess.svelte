@@ -8,10 +8,10 @@
   export let apiRoot: string;
   export let todayInfo: TodayInfoType;
 
+  let guesses = [];
+
   let hasGuessed = false;
   let hasCompleted = false;
-
-  let guesses = [];
   let errorMessage = "";
 
   function addGuess(guess: GuessResult) {
@@ -48,7 +48,6 @@
 
     if (response.ok) {
       const guessResponse: GuessResult = await response.json();
-      console.log("OK!", guessResponse);
       hasGuessed = true;
       addGuess(guessResponse);
 
@@ -56,7 +55,6 @@
         hasCompleted = true;
       }
     } else {
-      console.log("NOT OK!", response);
       if (response.status === 404) {
         errorMessage = "Ordet finnes ikke/er fjernet fra ordlisten";
       } else {
@@ -80,14 +78,12 @@
     if (response.ok) {
       let hintResponse = await response.json();
       hintResponse.word = `${hintResponse.word} 💡`;
-      console.log("OK!", hintResponse);
       addGuess(hintResponse);
 
       if (hintResponse.isCorrect) {
         hasCompleted = true;
       }
     } else {
-      console.log("NOT OK!", response);
       errorMessage = "Noe gikk galt! Prøv igjen senere";
     }
   }
