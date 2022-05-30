@@ -1,5 +1,6 @@
 <script lang="ts">
   import Result from "./Result.svelte";
+  import Summary from "./Summary.svelte";
 
   // Types
   import type { GuessResult } from "./types/GuessResult";
@@ -138,6 +139,10 @@
       disabled={hasCompleted}
     />
   </form>
+
+  {#if hasCompleted}
+    <Summary bind:guesses puzzleNumber={todayInfo.puzzleNumber} />
+  {/if}
 
   <Result bind:guesses />
 
