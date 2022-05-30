@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Result from "./Result.svelte";
     import type { TodayInfoType } from "./types/TodayInfo";
+    import type { GuessResult } from "./types/GuessResult";
     
     export let apiRoot: string;
     export let todayInfo: TodayInfoType;
@@ -10,14 +11,6 @@
 
     let guesses = [];
     let errorMessage = "";
-
-    interface GuessResult {
-        word: string;
-        similarity: number;
-        isClose: boolean;
-        isCorrect: boolean;
-        ofThousand: number | null;
-    }
 
     function addGuess(guess) {
         const guessResult = { ...guess, guessNumber: guesses.length + 1 }
