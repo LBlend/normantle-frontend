@@ -1,7 +1,7 @@
 <script lang="ts">
   import Header from "./components/Header.svelte";
   import TodayInfo from "./components/TodayInfo.svelte";
-  import Guess from "./components/guess.svelte";
+  import Guess from "./components/Guess.svelte";
   import Faq from "./components/Faq.svelte";
   import Footer from "./components/Footer.svelte";
 
