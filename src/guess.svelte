@@ -64,6 +64,11 @@
   }
 
   async function onHintSubmit() {
+    if (guesses[0].ofThousand === 1) {
+      errorMessage = "Du kan ikke motta flere hint!";
+      return;
+    }
+
     const response = await fetch(`${apiRoot}/hint`, {
       method: "POST",
       headers: {
