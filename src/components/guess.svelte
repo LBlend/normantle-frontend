@@ -3,8 +3,8 @@
   import Summary from "./Summary.svelte";
 
   // Types
-  import type { GuessResult } from "./types/GuessResult";
-  import type { TodayInfoType } from "./types/TodayInfo";
+  import type { GuessResult } from "../types/GuessResult";
+  import type { TodayInfoType } from "../types/TodayInfo";
 
   export let apiRoot: string;
   export let todayInfo: TodayInfoType;
