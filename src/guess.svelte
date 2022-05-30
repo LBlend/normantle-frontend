@@ -160,12 +160,18 @@
     font-size: 1.5rem;
     width: 85%;
   }
+  .guessField:disabled {
+    cursor: not-allowed;
+  }
   .submitButton {
     background-color: #666666;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
     padding: 0.5em;
+  }
+  .submitButton:disabled {
+    cursor: not-allowed;
   }
   .guessButton {
     flex: 1;
