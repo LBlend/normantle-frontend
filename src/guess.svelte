@@ -122,8 +122,14 @@
       id="word"
       name="ord"
       placeholder="Gjett"
+      disabled={hasCompleted}
     />
-    <input class="submitButton guessButton" type="submit" value="Gjett" />
+    <input
+      class="submitButton guessButton"
+      type="submit"
+      value="Gjett"
+      disabled={hasCompleted}
+    />
   </form>
 
   <Result bind:guesses />
