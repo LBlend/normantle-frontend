@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Result from "./Result.svelte";
-    import type { TodayInfoType } from "./types/TodayInfo";
+
+    // Types
     import type { GuessResult } from "./types/GuessResult";
+    import type { TodayInfoType } from "./types/TodayInfo";
+
     
     export let apiRoot: string;
     export let todayInfo: TodayInfoType;
