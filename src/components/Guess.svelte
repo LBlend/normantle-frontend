@@ -141,7 +141,7 @@
   </form>
 
   {#if hasCompleted}
-    <Summary bind:guesses puzzleNumber={todayInfo.puzzleNumber} />
+    <Summary bind:guesses puzzleNumber={todayInfo.puzzleNumber} {apiRoot} />
   {/if}
 
   <Result bind:guesses />

@@ -3,6 +3,7 @@
 
   export let guesses;
   export let puzzleNumber;
+  export let apiRoot;
 
   let numberOfGuesses = guesses.length;
   let numberOfHints = guesses.filter((guess) =>
@@ -64,7 +65,8 @@
       <button on:click={copy}>Trykk her</button>
     </Clipboard> for å dele resultatet ditt. Du kan se de nærmeste 1000 ordene for
     dagen
-    <a href={`/top1000/${puzzleNumber}`} target="_blank">her</a>
+    <a href={`${apiRoot}/top1000?puzzle=${puzzleNumber}`} target="_blank">her</a
+    >
   </p>
 
   <table>
