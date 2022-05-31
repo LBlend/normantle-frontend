@@ -24,7 +24,7 @@
   async function onWordSubmit(e) {
     errorMessage = "";
 
-    const word = e.target.word.value.toLowerCase();
+    const word = e.target.word.value.trim().toLowerCase();
     e.target.word.value = ""; // Clear input
 
     if (word === "") {
