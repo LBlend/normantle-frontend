@@ -53,8 +53,9 @@
     <div>
       <h3>Spillet suger og har masse feil i seg!</h3>
       <p>
-        Da anbefaler jeg deg å rapportere om feilen på <a href="https://github.com/LBlend/normantle">Github</a> eller enda bedre,
-        fikse feilen selv der.
+        Da anbefaler jeg deg å rapportere om feilen på <a
+          href="https://github.com/LBlend/normantle">Github</a
+        > eller enda bedre, fikse feilen selv der.
       </p>
     </div>
   </div>
