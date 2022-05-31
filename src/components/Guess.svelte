@@ -92,6 +92,9 @@
     } else {
       errorMessage = "Noe gikk galt! Prøv igjen senere";
     }
+
+    // Scroll back up to guess bar when requesting hint. Janky solution but hey it works
+    window.location.href = window.location.href.split("#")[0] + "#guess";
   }
 
   async function onSurrender() {
@@ -115,6 +118,9 @@
     } else {
       errorMessage = "Noe gikk galt! Prøv igjen senere";
     }
+
+    // Scroll back up to guess bar when requesting hint. Janky solution but hey it works
+    window.location.href = window.location.href.split("#")[0] + "#guess";
   }
 </script>
 
