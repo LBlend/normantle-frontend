@@ -4,7 +4,6 @@ Frontenden for prosjektet [Normantle](https://normantle.lblend.moe).
 
 For mer informasjon angående prosjektet se [backendrepoet](https://github.com/LBlend/normantle)
 
-
 ## Kom i gang
 
 <details>
@@ -50,7 +49,7 @@ Her kan du så klart endre på variabler som du ønsker.
 
 1. Klon repoet
 
-2. Gå inn i [Dockerfila](Dockerfile) og endre på `API_ROOT` til å peke mot din backend.
+2. Endre navn på [.env.example](.env.example) og endre på `API_ROOT` til å peke mot din backend.
 
 3. Bygg dockerbildet
 
