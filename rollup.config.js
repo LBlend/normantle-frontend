@@ -10,8 +10,13 @@ import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
 
 const configToReplace = {};
-for (const [key, v] of Object.entries(config().parsed)) {
-  configToReplace[`process.env.${key}`] = `'${v}'`;
+
+if (config().parsed) {
+  for (const [key, v] of Object.entries(config().parsed)) {
+    configToReplace[`process.env.${key}`] = `'${v}'`;
+  }
+} else {
+  configToReplace["process.env.API_ROOT"] = "'http://localhost:5000'";
 }
 
 const production = !process.env.ROLLUP_WATCH;
