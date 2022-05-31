@@ -12,8 +12,6 @@ RUN yarn install
 
 COPY . ./
 
-ENV API_ROOT=http://127.0.0.1:5000
-
 RUN yarn build
 
 EXPOSE 3000
