@@ -62,6 +62,8 @@
         errorMessage = "Noe gikk galt! Prøv igjen senere";
       }
     }
+
+    e.target.word.focus(); // Refocus on guess input after submitting a guess
   }
 
   async function onHintSubmit() {
