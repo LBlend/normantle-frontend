@@ -14,11 +14,13 @@
   let hasGuessed = false;
   let hasCompleted = false;
   let errorMessage = "";
+  let mostRecentGuess = null;
 
   function addGuess(guess: GuessResult) {
     const guessResult = { ...guess, guessNumber: guesses.length + 1 };
     guesses = [guessResult, ...guesses];
     guesses = guesses.sort((a, b) => b.similarity - a.similarity);
+    mostRecentGuess = guessResult;
   }
 
   async function onWordSubmit(e) {
@@ -152,7 +154,7 @@
     <Summary bind:guesses puzzleNumber={todayInfo.puzzleNumber} {apiRoot} />
   {/if}
 
-  <Result bind:guesses />
+  <Result bind:guesses bind:mostRecentGuess />
 
   {#if hasGuessed && !hasCompleted}
     <div id="hintSurrender">
