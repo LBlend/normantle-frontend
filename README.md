@@ -1,6 +1,6 @@
 # Normantle frontend
 
-Frontenden for prosjektet [Normantle](https://normantle.lblend.moe).
+Frontenden for prosjektet [Normantle](https://normantle.furumo.eu).
 
 For mer informasjon angående prosjektet se [backendrepoet](https://github.com/LBlend/normantle)
 

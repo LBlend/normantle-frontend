@@ -47,7 +47,7 @@
         ).toFixed(2)} (${1000 - lastIncorrect.ofThousand}/1000)`;
     }
   }
-  shareText = `${shareText}\n\nhttps://normantle.lblend.moe/`;
+  shareText = `${shareText}\n\nhttps://normantle.furumo.eu/`;
 
   let resultText = gaveUp ? "Du ga opp" : "Du løste dagens Normanlte";
 </script>
