@@ -34,6 +34,6 @@ jobs:
           tags: |
             ghcr.io/lblend/normantle-frontend:latest
             ghcr.io/lblend/normantle-frontend:${{ github.event.release.tag_name }}
-  permissions:
+    permissions:
       contents: read
       pull-requests: write
