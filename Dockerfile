@@ -6,14 +6,14 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json ./
 
-COPY yarn.lock ./
+COPY package-lock.json ./
 
-RUN yarn install
+RUN npm ci
 
 COPY . ./
 
-RUN yarn build
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["yarn", "start", "--host", "--port", "3000"]
+CMD ["npm", "start", "--", "--host", "--port", "3000"]

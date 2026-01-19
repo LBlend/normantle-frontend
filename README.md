@@ -13,12 +13,12 @@ For mer informasjon angående prosjektet se [backendrepoet](https://github.com/L
 0. Klon repoet og last ned avhengighetene:
 
    - node.js
-   - yarn
+   - npm
 
 1. Installer prosjektavhengighetene
 
 ```
-yarn install
+npm install
 ```
 
 2. Lag en kopi av filen [env.example](env.example) og gi den navnet `.env`. Bytt så ut URLen med en som peker mot din egen backend
@@ -26,7 +26,7 @@ yarn install
 3. Kjør webappen
 
 ```
-yarn dev
+npm run dev
 ```
 
 </details>
