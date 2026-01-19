@@ -67,6 +67,7 @@ export default {
         // enable run-time checks when not in production
         dev: !production,
       },
+      emitCss: true,
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
@@ -83,8 +84,11 @@ export default {
     }),
     commonjs(),
     typescript({
-      sourceMap: !production,
+      sourceMap: true,
       inlineSources: !production,
+      compilerOptions: {
+        sourceMap: true,
+      },
     }),
 
     // In dev mode, call `npm run start` once
