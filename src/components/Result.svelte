@@ -4,12 +4,15 @@
 </script>
 
 <table>
-  <tr>
-    <th>#</th>
-    <th>Ord</th>
-    <th>Likhetsgrad</th>
-    <th>Nærme?</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Ord</th>
+      <th>Likhetsgrad</th>
+      <th>Nærme?</th>
+    </tr>
+  </thead>
+  <tbody>
   {#if mostRecentGuess}
     <tr class="most-recent">
       <td>{mostRecentGuess.guessNumber}</td>
@@ -36,6 +39,7 @@
       </tr>
     {/if}
   {/each}
+  </tbody>
 </table>
 
 <style>

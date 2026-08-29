@@ -70,18 +70,20 @@
   </p>
 
   <table>
-    <tr>
-      <th>Antall gjett:</th>
-      <td>{gaveUp ? numberOfRealGuesses - 1 : numberOfRealGuesses}</td>
-    </tr>
-    <tr>
-      <th>Antall hint brukt:</th>
-      <td>{numberOfHints}</td>
-    </tr>
-    <tr>
-      <th>Totalt antall forsøk brukt:</th>
-      <td>{gaveUp ? numberOfGuesses - 1 : numberOfGuesses}</td>
-    </tr>
+    <tbody>
+      <tr>
+        <th>Antall gjett:</th>
+        <td>{gaveUp ? numberOfRealGuesses - 1 : numberOfRealGuesses}</td>
+      </tr>
+      <tr>
+        <th>Antall hint brukt:</th>
+        <td>{numberOfHints}</td>
+      </tr>
+      <tr>
+        <th>Totalt antall forsøk brukt:</th>
+        <td>{gaveUp ? numberOfGuesses - 1 : numberOfGuesses}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
