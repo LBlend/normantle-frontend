@@ -26,11 +26,22 @@
     </div>
 
     <div>
+      <h3>Hva slags ord kan være dagens ord?</h3>
+      <p>
+        Dagens ord er alltid et substantiv. Du kan likevel gjette verb,
+        adjektiver og adverb for å finne ut hva ordet handler om, men de kan
+        aldri være riktig svar.
+      </p>
+    </div>
+
+    <div>
       <h3>Går det an å skrive på nynorsk?</h3>
       <p>
-        I utgangspunktet ikke, men siden dataene er litt dårlige kan man finne
-        ord som ikke er bokmål, ikke norsk eller ord som ikke er ord i noe som
-        helst språk engang!
+        Nei. Spillet godtar bare bokmålsord som står i <a
+          href="https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/"
+          >Norsk ordbank</a
+        >. Nynorsk, feilstavinger og småord som "og" og "hvorfor" finnes derfor
+        ikke i ordlisten.
       </p>
     </div>
 

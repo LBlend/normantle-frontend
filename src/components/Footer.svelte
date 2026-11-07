@@ -9,6 +9,11 @@
     fra
     <a href="https://www.mn.uio.no/ifi/english/research/groups/ltg/">LTG Oslo</a
     >
+    og ordklasser fra
+    <a href="https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/"
+      >Norsk ordbank</a
+    >
+    (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)
   </p>
 </footer>
 
