@@ -16,7 +16,6 @@
   let word = $state("");
   let errorMessage = $state("");
   let pending = $state(false);
-  let container: HTMLDivElement;
   let input: HTMLInputElement;
 
   const sortedGuesses = $derived(
@@ -90,6 +89,7 @@
 
     if (sortedGuesses[0].ofThousand === 1) {
       errorMessage = "Du kan ikke motta flere hint!";
+      input.focus({ preventScroll: true });
       return;
     }
 
@@ -101,7 +101,7 @@
       addGuess(result, "hint");
     });
 
-    container.scrollIntoView();
+    input.focus({ preventScroll: true });
   }
 
   async function onSurrender(event: SubmitEvent) {
@@ -114,12 +114,10 @@
       );
       addGuess(result, "surrender");
     });
-
-    container.scrollIntoView();
   }
 </script>
 
-<div id="guess" bind:this={container}>
+<div id="guess">
   {#if errorMessage}
     <p class="error">{errorMessage}</p>
   {/if}
@@ -147,12 +145,6 @@
     />
   </form>
 
-  {#if hasCompleted}
-    <Summary guesses={sortedGuesses} puzzleNumber={todayInfo.puzzleNumber} />
-  {/if}
-
-  <Result guesses={sortedGuesses} {mostRecentGuess} />
-
   {#if hasGuessed && !hasCompleted}
     <div id="hintSurrender">
       <form onsubmit={onHintSubmit}>
@@ -173,6 +165,12 @@
       </form>
     </div>
   {/if}
+
+  {#if hasCompleted}
+    <Summary guesses={sortedGuesses} puzzleNumber={todayInfo.puzzleNumber} />
+  {/if}
+
+  <Result guesses={sortedGuesses} {mostRecentGuess} />
 </div>
 
 <style>
