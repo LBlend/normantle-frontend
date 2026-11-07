@@ -1,35 +1,39 @@
-<script>
-  export let guesses;
-  export let puzzleNumber;
-  export let apiRoot;
+<script lang="ts">
+  import type { GuessEntry } from "../types/GuessResult";
 
-  let numberOfGuesses = guesses.length;
-  let numberOfHints = guesses.filter((guess) =>
-    guess.word.includes("💡")
-  ).length;
-  let numberOfRealGuesses = numberOfGuesses - numberOfHints;
-  let correctWord = guesses[0].word.split(" ")[0];
+  let {
+    guesses,
+    puzzleNumber,
+    apiRoot,
+  }: { guesses: GuessEntry[]; puzzleNumber: number; apiRoot: string } =
+    $props();
 
-  let firstGuess = guesses.find((guess) => guess.guessNumber === 1);
-  let firstTopThousand = guesses
-    .filter((guess) => guess.ofThousand !== null && guess.ofThousand <= 1000)
-    .sort((a, b) => a.guessNumber - b.guessNumber)[0];
+  const gaveUp = $derived(guesses.some((guess) => guess.kind === "surrender"));
+  const numberOfHints = $derived(
+    guesses.filter((guess) => guess.kind === "hint").length,
+  );
+  const numberOfRealGuesses = $derived(
+    guesses.filter((guess) => guess.kind === "guess").length,
+  );
+  const correctWord = $derived(guesses[0].word);
+  const firstGuess = $derived(
+    guesses.find((guess) => guess.guessNumber === 1) ?? guesses[0],
+  );
+  const firstTopThousand = $derived(
+    guesses
+      .filter((guess) => guess.ofThousand !== null && guess.ofThousand <= 1000)
+      .sort((a, b) => a.guessNumber - b.guessNumber)[0],
+  );
+  const lastIncorrect = $derived(guesses[1] ?? guesses[0]);
 
-  let lastIncorrect = guesses[0];
-  if (guesses.length > 1) {
-    lastIncorrect = guesses[1];
-  }
+  const shareText = $derived.by(() => {
+    if (gaveUp) {
+      return `Jeg ga opp på Normanle #${puzzleNumber} etter å ha gjettet ${numberOfRealGuesses} gang${
+        numberOfRealGuesses === 1 ? "" : "er"
+      } og brukt ${numberOfHints} hint\n\nhttps://normantle.furumo.eu/`;
+    }
 
-  let shareText = "";
-  const gaveUp = guesses[0].word.includes("🏳️");
-  if (gaveUp) {
-    shareText = `Jeg ga opp på Normanle #${puzzleNumber} etter å ha gjettet ${
-      numberOfRealGuesses - 1
-    } gang${
-      numberOfRealGuesses - 1 === 1 ? "" : "er"
-    } og brukt ${numberOfHints} hint`;
-  } else {
-    shareText = `Jeg løste Normanlte #${puzzleNumber} og brukte ${numberOfRealGuesses} forsøk på å gjette ordet
+    let text = `Jeg løste Normanlte #${puzzleNumber} og brukte ${numberOfRealGuesses} forsøk på å gjette ordet
 
 - Brukte hint: ${numberOfHints}
 - Likhetsgrad på første gjett: ${(firstGuess.similarity * 100).toFixed(2)}
@@ -38,16 +42,17 @@
     }`;
 
     if (firstTopThousand) {
-      shareText =
-        shareText +
-        `\n- Likhetsgrad på nest siste gjett: ${(
-          lastIncorrect.similarity * 100
-        ).toFixed(2)} (${1000 - lastIncorrect.ofThousand}/1000)`;
+      text += `\n- Likhetsgrad på nest siste gjett: ${(
+        lastIncorrect.similarity * 100
+      ).toFixed(2)} (${1000 - (lastIncorrect.ofThousand ?? 0)}/1000)`;
     }
-  }
-  shareText = `${shareText}\n\nhttps://normantle.furumo.eu/`;
 
-  let resultText = gaveUp ? "Du ga opp" : "Du løste dagens Normanlte";
+    return `${text}\n\nhttps://normantle.furumo.eu/`;
+  });
+
+  const resultText = $derived(
+    gaveUp ? "Du ga opp" : "Du løste dagens Normanlte",
+  );
 
   async function copy() {
     try {
@@ -62,8 +67,8 @@
 <div id="summary">
   <p>{resultText}! Dagens ord er: <b>{correctWord}</b></p>
   <p>
-    <button on:click={copy}>Trykk her</button> for å dele resultatet ditt. Du kan se de nærmeste 1000 ordene for
-    dagen
+    <button onclick={copy}>Trykk her</button> for å dele resultatet ditt. Du kan
+    se de nærmeste 1000 ordene for dagen
     <a href={`${apiRoot}/top1000?puzzle=${puzzleNumber}`} target="_blank">her</a
     >
   </p>
@@ -72,7 +77,7 @@
     <tbody>
       <tr>
         <th>Antall gjett:</th>
-        <td>{gaveUp ? numberOfRealGuesses - 1 : numberOfRealGuesses}</td>
+        <td>{numberOfRealGuesses}</td>
       </tr>
       <tr>
         <th>Antall hint brukt:</th>
@@ -80,7 +85,7 @@
       </tr>
       <tr>
         <th>Totalt antall forsøk brukt:</th>
-        <td>{gaveUp ? numberOfGuesses - 1 : numberOfGuesses}</td>
+        <td>{numberOfRealGuesses + numberOfHints}</td>
       </tr>
     </tbody>
   </table>

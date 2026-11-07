@@ -5,3 +5,10 @@ export interface GuessResult {
   isCorrect: boolean;
   ofThousand: number | null;
 }
+
+export type GuessKind = "guess" | "hint" | "surrender";
+
+export interface GuessEntry extends GuessResult {
+  guessNumber: number;
+  kind: GuessKind;
+}

@@ -1,7 +1,26 @@
-<script>
-  export let guesses;
-  export let mostRecentGuess;
+<script lang="ts">
+  import type { GuessEntry } from "../types/GuessResult";
+
+  let {
+    guesses,
+    mostRecentGuess,
+  }: { guesses: GuessEntry[]; mostRecentGuess: GuessEntry | null } = $props();
+
+  const labels = { guess: "", hint: " 💡", surrender: " 🏳️🇫🇷" };
 </script>
+
+{#snippet row(guess: GuessEntry, className = "")}
+  <tr class={className}>
+    <td>{guess.guessNumber}</td>
+    <td>{guess.word}{labels[guess.kind]}</td>
+    <td>{(guess.similarity * 100).toFixed(2)}</td>
+    {#if guess.isClose}
+      <td>{1000 - (guess.ofThousand ?? 0)}/1000</td>
+    {:else}
+      <td>nei</td>
+    {/if}
+  </tr>
+{/snippet}
 
 <table>
   <thead>
@@ -13,32 +32,14 @@
     </tr>
   </thead>
   <tbody>
-  {#if mostRecentGuess}
-    <tr class="most-recent">
-      <td>{mostRecentGuess.guessNumber}</td>
-      <td>{mostRecentGuess.word}</td>
-      <td>{(mostRecentGuess.similarity * 100).toFixed(2)}</td>
-      {#if mostRecentGuess.isClose}
-        <td>{1000 - mostRecentGuess.ofThousand}/1000</td>
-      {:else}
-        <td>nei</td>
-      {/if}
-    </tr>
-  {/if}
-  {#each guesses as guess}
-    {#if guess !== mostRecentGuess}
-      <tr>
-        <td>{guess.guessNumber}</td>
-        <td>{guess.word}</td>
-        <td>{(guess.similarity * 100).toFixed(2)}</td>
-        {#if guess.isClose}
-          <td>{1000 - guess.ofThousand}/1000</td>
-        {:else}
-          <td>nei</td>
-        {/if}
-      </tr>
+    {#if mostRecentGuess}
+      {@render row(mostRecentGuess, "most-recent")}
     {/if}
-  {/each}
+    {#each guesses as guess (guess.guessNumber)}
+      {#if guess !== mostRecentGuess}
+        {@render row(guess)}
+      {/if}
+    {/each}
   </tbody>
 </table>
 

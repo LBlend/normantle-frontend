@@ -1,5 +1,7 @@
-<script>
-  export let todayInfo;
+<script lang="ts">
+  import type { TodayInfoType } from "../types/TodayInfo";
+
+  let { todayInfo }: { todayInfo: TodayInfoType } = $props();
 </script>
 
 <div>
