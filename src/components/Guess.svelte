@@ -131,6 +131,10 @@
       name="ord"
       placeholder="Gjett"
       maxlength="64"
+      autocomplete="off"
+      autocapitalize="none"
+      spellcheck="false"
+      enterkeyhint="send"
       bind:value={word}
       bind:this={input}
       disabled={hasCompleted}
@@ -174,16 +178,17 @@
 <style>
   #guess {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
   }
   .guessForm {
-    width: 100%;
     display: flex;
     gap: 0.5rem;
   }
   .guessField {
+    flex: 1;
+    min-width: 0;
     font-size: 1.5rem;
-    width: 85%;
   }
   .guessField:disabled {
     cursor: not-allowed;
@@ -193,13 +198,13 @@
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    padding: 0.5em;
+    padding: 0.5em 1em;
+    min-height: 2.75rem;
   }
   .submitButton:disabled {
     cursor: not-allowed;
   }
   .guessButton {
-    flex: 1;
     font-size: 1.25rem;
   }
   #hintSurrender {

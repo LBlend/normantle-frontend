@@ -13,7 +13,7 @@
   {@const close = closeness(guess)}
   <tr class={className}>
     <td>{guess.guessNumber}</td>
-    <td>{guess.word}{labels[guess.kind]}</td>
+    <td class="word">{guess.word}{labels[guess.kind]}</td>
     <td>{(guess.similarity * 100).toFixed(2)}</td>
     <td>{close === null ? "nei" : `${close}/1000`}</td>
   </tr>
@@ -42,12 +42,21 @@
 
 <style>
   table {
+    width: 100%;
     border-collapse: collapse;
   }
 
   td,
   th {
     padding: 1rem;
+    white-space: nowrap;
+  }
+
+  .word {
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
   th {
     border-bottom: 2px solid white;
@@ -59,9 +68,13 @@
   }
 
   @media screen and (max-width: 600px) {
+    table {
+      font-size: 0.875rem;
+    }
+
     td,
     th {
-      padding: 0.5rem;
+      padding: 0.5rem 0.25rem;
     }
   }
 </style>

@@ -44,11 +44,6 @@
     </div>
 
     <div>
-      <h3>Hvorfor ser ting så rart ut på mobil?</h3>
-      <p>Fordi jeg er lat. Mobile-first er for folk med tid</p>
-    </div>
-
-    <div>
       <h3>Spillet suger og har masse feil i seg!</h3>
       <p>
         Da anbefaler jeg deg å rapportere om feilen på <a

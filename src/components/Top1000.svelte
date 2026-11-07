@@ -36,7 +36,7 @@
         {#each words as word, index (word.word)}
           <tr>
             <td>{index + 1}</td>
-            <td>{word.word}</td>
+            <td class="word">{word.word}</td>
             <td>{(word.similarity * 100).toFixed(2)}</td>
           </tr>
         {/each}
@@ -50,10 +50,12 @@
 <style>
   #top1000 {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
   }
 
   table {
+    width: 100%;
     border-collapse: collapse;
   }
 
@@ -61,10 +63,25 @@
   th {
     padding: 0.5rem 1rem;
     text-align: left;
+    white-space: nowrap;
+  }
+
+  .word {
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 
   th {
     border-bottom: 2px solid white;
+  }
+
+  @media screen and (max-width: 600px) {
+    td,
+    th {
+      padding: 0.5rem 0.25rem;
+    }
   }
 
   tbody tr:nth-child(even) {
