@@ -32,7 +32,7 @@
     event.preventDefault();
     errorMessage = "";
 
-    const guess = word.trim().toLowerCase();
+    const guess = word.trim().toLowerCase().normalize("NFC");
     word = "";
 
     if (guess === "") {
@@ -120,6 +120,7 @@
       type="text"
       name="ord"
       placeholder="Gjett"
+      maxlength="64"
       bind:value={word}
       bind:this={input}
       disabled={hasCompleted}

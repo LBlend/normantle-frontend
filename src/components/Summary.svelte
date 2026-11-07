@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { GuessEntry } from "../types/GuessResult";
+  import { closeness, type GuessEntry } from "../types/GuessResult";
 
   let {
     guesses,
@@ -15,43 +15,48 @@
   const numberOfRealGuesses = $derived(
     guesses.filter((guess) => guess.kind === "guess").length,
   );
-  const correctWord = $derived(guesses[0].word);
-  const firstGuess = $derived(
-    guesses.find((guess) => guess.guessNumber === 1) ?? guesses[0],
+  const chronological = $derived(
+    [...guesses].sort((a, b) => a.guessNumber - b.guessNumber),
   );
-  const firstTopThousand = $derived(
-    guesses
-      .filter((guess) => guess.ofThousand !== null && guess.ofThousand <= 1000)
-      .sort((a, b) => a.guessNumber - b.guessNumber)[0],
-  );
-  const lastIncorrect = $derived(guesses[1] ?? guesses[0]);
+  const correctWord = $derived(guesses.find((guess) => guess.isCorrect)?.word);
+
+  function formatSimilarity(guess: GuessEntry) {
+    return (guess.similarity * 100).toFixed(2);
+  }
 
   const shareText = $derived.by(() => {
     if (gaveUp) {
-      return `Jeg ga opp på Normanle #${puzzleNumber} etter å ha gjettet ${numberOfRealGuesses} gang${
+      return `Jeg ga opp på Normantle #${puzzleNumber} etter å ha gjettet ${numberOfRealGuesses} gang${
         numberOfRealGuesses === 1 ? "" : "er"
       } og brukt ${numberOfHints} hint\n\nhttps://normantle.furumo.eu/`;
     }
 
-    let text = `Jeg løste Normanlte #${puzzleNumber} og brukte ${numberOfRealGuesses} forsøk på å gjette ordet
+    const firstTopThousand = chronological.findIndex(
+      (guess) => closeness(guess) !== null,
+    );
+    const lines = [
+      `Jeg løste Normantle #${puzzleNumber} og brukte ${numberOfRealGuesses} forsøk på å gjette ordet`,
+      "",
+      `- Brukte hint: ${numberOfHints}`,
+      `- Likhetsgrad på første gjett: ${formatSimilarity(chronological[0])}`,
+      `- Antall gjett før første blant topp tusen: ${firstTopThousand}`,
+    ];
 
-- Brukte hint: ${numberOfHints}
-- Likhetsgrad på første gjett: ${(firstGuess.similarity * 100).toFixed(2)}
-- Antall gjett før første blant topp tusen: ${
-      firstTopThousand ? firstTopThousand.guessNumber - 1 : 0
-    }`;
-
-    if (firstTopThousand) {
-      text += `\n- Likhetsgrad på nest siste gjett: ${(
-        lastIncorrect.similarity * 100
-      ).toFixed(2)} (${1000 - (lastIncorrect.ofThousand ?? 0)}/1000)`;
+    const penultimate = chronological.at(-2);
+    if (penultimate) {
+      const close = closeness(penultimate);
+      lines.push(
+        `- Likhetsgrad på nest siste gjett: ${formatSimilarity(penultimate)}${
+          close === null ? "" : ` (${close}/1000)`
+        }`,
+      );
     }
 
-    return `${text}\n\nhttps://normantle.furumo.eu/`;
+    return `${lines.join("\n")}\n\nhttps://normantle.furumo.eu/`;
   });
 
   const resultText = $derived(
-    gaveUp ? "Du ga opp" : "Du løste dagens Normanlte",
+    gaveUp ? "Du ga opp" : "Du løste dagens Normantle",
   );
 
   async function copy() {

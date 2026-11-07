@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { GuessEntry } from "../types/GuessResult";
+  import { closeness, type GuessEntry } from "../types/GuessResult";
 
   let {
     guesses,
@@ -10,15 +10,12 @@
 </script>
 
 {#snippet row(guess: GuessEntry, className = "")}
+  {@const close = closeness(guess)}
   <tr class={className}>
     <td>{guess.guessNumber}</td>
     <td>{guess.word}{labels[guess.kind]}</td>
     <td>{(guess.similarity * 100).toFixed(2)}</td>
-    {#if guess.isClose}
-      <td>{1000 - (guess.ofThousand ?? 0)}/1000</td>
-    {:else}
-      <td>nei</td>
-    {/if}
+    <td>{close === null ? "nei" : `${close}/1000`}</td>
   </tr>
 {/snippet}
 

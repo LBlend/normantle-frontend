@@ -14,16 +14,14 @@
 
     <div>
       <h3>Når resettes klokka?</h3>
-      <p>Klokken 00:00 norsk tid (+ 1 minutt slingringmonn)</p>
+      <p>Klokken 00:00 norsk tid</p>
     </div>
 
     <div>
-      <h3>Hva er grensen for at et ord blir godkjent som "riktig"?</h3>
+      <h3>Når blir et ord godkjent som "riktig"?</h3>
       <p>
-        Med likhetsgrad på over høyere enn 90 vil du få godkjent ordet. Dette
-        kan i noen tilfeller være et ord som ikke har samme semantisk betydning,
-        men siden modellen brukt til å regne ut likhet er litt svak vil ord som
-        er semantisk like ofte ikke nå over denne grensen heller.
+        Bare når du gjetter nøyaktig dagens ord. Synonymer og ord som ligner mye
+        kan få høy likhetsgrad, men blir ikke godkjent.
       </p>
     </div>
 
