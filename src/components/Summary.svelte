@@ -1,6 +1,4 @@
 <script>
-  import Clipboard from "svelte-clipboard";
-
   export let guesses;
   export let puzzleNumber;
   export let apiRoot;
@@ -50,20 +48,21 @@
   shareText = `${shareText}\n\nhttps://normantle.furumo.eu/`;
 
   let resultText = gaveUp ? "Du ga opp" : "Du løste dagens Normanlte";
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(shareText);
+      alert("Kopiert til utklippstavla!");
+    } catch {
+      alert("Klarte ikke å kopiere til utklippstavla");
+    }
+  }
 </script>
 
 <div id="summary">
   <p>{resultText}! Dagens ord er: <b>{correctWord}</b></p>
   <p>
-    <Clipboard
-      text={shareText}
-      let:copy
-      on:copy={() => {
-        alert("Kopiert til utklippstavla!");
-      }}
-    >
-      <button on:click={copy}>Trykk her</button>
-    </Clipboard> for å dele resultatet ditt. Du kan se de nærmeste 1000 ordene for
+    <button on:click={copy}>Trykk her</button> for å dele resultatet ditt. Du kan se de nærmeste 1000 ordene for
     dagen
     <a href={`${apiRoot}/top1000?puzzle=${puzzleNumber}`} target="_blank">her</a
     >

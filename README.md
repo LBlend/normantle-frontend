@@ -12,8 +12,7 @@ For mer informasjon angående prosjektet se [backendrepoet](https://github.com/L
 
 0. Klon repoet og last ned avhengighetene:
 
-   - node.js
-   - npm
+   - [Node.js](https://nodejs.org/) 26 eller nyere (se [.nvmrc](.nvmrc))
 
 1. Installer prosjektavhengighetene
 
@@ -21,7 +20,7 @@ For mer informasjon angående prosjektet se [backendrepoet](https://github.com/L
 npm install
 ```
 
-2. Lag en kopi av filen [env.example](env.example) og gi den navnet `.env`. Bytt så ut URLen med en som peker mot din egen backend
+2. Lag en kopi av filen [.env.example](.env.example) og gi den navnet `.env`. Bytt så ut URLen med en som peker mot din egen backend
 
 3. Kjør webappen
 
@@ -49,12 +48,10 @@ Her kan du så klart endre på variabler som du ønsker.
 
 1. Klon repoet
 
-2. Endre navn på [.env.example](.env.example) og endre på `API_ROOT` til å peke mot din backend.
-
-3. Bygg dockerbildet
+2. Bygg dockerbildet med `API_ROOT` satt til URLen til din backend
 
 ```
-docker build -t normantle-frontend .
+docker build --build-arg API_ROOT=https://din-backend.no -t normantle-frontend .
 ```
 
 4. Lag og kjør en dockercontainer

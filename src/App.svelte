@@ -6,7 +6,7 @@
   import Footer from "./components/Footer.svelte";
 
 
-  let apiRoot = process.env.API_ROOT || "http://127.0.0.1:5000";
+  let apiRoot = import.meta.env.API_ROOT || "http://127.0.0.1:5000";
 
   let todayInfo = {
     puzzleNumber: 0,
