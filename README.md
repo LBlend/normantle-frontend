@@ -36,30 +36,28 @@ npm run dev
 
 ### Valgmulighet 1 - Bruke forhåndsbygget versjon
 
-1. Skriv denne kommandoen for å kjøre webappen.
+1. Skriv denne kommandoen for å kjøre webappen. Bytt ut URLen med en som peker mot din egen backend.
 
 ```
-docker run -d -p 3000:3000 --name normantle-frontend ghcr.io/lblend/normantle-frontend:latest
+docker run -d -p 3000:3000 -e API_ROOT=https://din-backend.no --name normantle-frontend ghcr.io/lblend/normantle-frontend:latest
 ```
-
-Her kan du så klart endre på variabler som du ønsker.
 
 ### Valgmulighet 2 - Bygge et dockerbilde på egenhånd
 
 1. Klon repoet
 
-2. Bygg dockerbildet med `API_ROOT` satt til URLen til din backend
+2. Bygg dockerbildet
 
 ```
-docker build --build-arg API_ROOT=https://din-backend.no -t normantle-frontend .
+docker build -t normantle-frontend .
 ```
 
-4. Lag og kjør en dockercontainer
+3. Lag og kjør en dockercontainer
 
 ```
-docker run -d -p 3000:3000 --name normantle-frontend normantle-frontend
+docker run -d -p 3000:3000 -e API_ROOT=https://din-backend.no --name normantle-frontend normantle-frontend
 ```
 
-Merk deg her at om du har valgt å endre port i dockerfila, så bør det reflekteres her.
+`API_ROOT` leses når containeren starter. Du kan også bake den inn i bildet med `--build-arg API_ROOT=...`. Den brukes da hvis miljøvariabelen ikke er satt.
 
 </details>

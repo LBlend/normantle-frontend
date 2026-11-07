@@ -6,7 +6,8 @@
   import Footer from "./components/Footer.svelte";
   import { route } from "./router.svelte";
 
-  const apiRoot = import.meta.env.API_ROOT || "http://127.0.0.1:5000";
+  const apiRoot =
+    window.API_ROOT || import.meta.env.API_ROOT || "http://127.0.0.1:5000";
 </script>
 
 <svelte:head>

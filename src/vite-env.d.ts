@@ -5,6 +5,10 @@ interface ImportMetaEnv {
   readonly API_ROOT?: string;
 }
 
+interface Window {
+  readonly API_ROOT?: string;
+}
+
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
