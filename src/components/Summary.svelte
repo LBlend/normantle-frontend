@@ -1,12 +1,11 @@
 <script lang="ts">
+  import { showTopPuzzle, topPuzzleHref } from "../router.svelte";
   import { closeness, type GuessEntry } from "../types/GuessResult";
 
   let {
     guesses,
     puzzleNumber,
-    apiRoot,
-  }: { guesses: GuessEntry[]; puzzleNumber: number; apiRoot: string } =
-    $props();
+  }: { guesses: GuessEntry[]; puzzleNumber: number } = $props();
 
   const gaveUp = $derived(guesses.some((guess) => guess.kind === "surrender"));
   const numberOfHints = $derived(
@@ -74,7 +73,9 @@
   <p>
     <button onclick={copy}>Trykk her</button> for å dele resultatet ditt. Du kan
     se de nærmeste 1000 ordene for dagen
-    <a href={`${apiRoot}/top1000?puzzle=${puzzleNumber}`} target="_blank">her</a
+    <a
+      href={topPuzzleHref(puzzleNumber)}
+      onclick={(event) => showTopPuzzle(event, puzzleNumber)}>her</a
     >
   </p>
 

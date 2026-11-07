@@ -144,11 +144,7 @@
   </form>
 
   {#if hasCompleted}
-    <Summary
-      guesses={sortedGuesses}
-      puzzleNumber={todayInfo.puzzleNumber}
-      {apiRoot}
-    />
+    <Summary guesses={sortedGuesses} puzzleNumber={todayInfo.puzzleNumber} />
   {/if}
 
   <Result guesses={sortedGuesses} {mostRecentGuess} />

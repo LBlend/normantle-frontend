@@ -1,34 +1,43 @@
 <script lang="ts">
   import Header from "./components/Header.svelte";
-  import TodayInfo from "./components/TodayInfo.svelte";
-  import Guess from "./components/Guess.svelte";
+  import Game from "./components/Game.svelte";
+  import Top1000 from "./components/Top1000.svelte";
   import Faq from "./components/Faq.svelte";
   import Footer from "./components/Footer.svelte";
-  import { describeError, request } from "./api";
-  import type { TodayInfoType } from "./types/TodayInfo";
+  import { route } from "./router.svelte";
 
   const apiRoot = import.meta.env.API_ROOT || "http://127.0.0.1:5000";
-
-  const today = request<TodayInfoType>(apiRoot, "/today");
 </script>
+
+<svelte:head>
+  <title>
+    {route.topPuzzle === null
+      ? "Normantle"
+      : `De 1000 nærmeste ordene for #${route.topPuzzle} - Normantle`}
+  </title>
+</svelte:head>
 
 <Header />
 <main>
-  {#await today}
-    <p>Henter dagens ord…</p>
-  {:then todayInfo}
-    <TodayInfo {todayInfo} />
-    <Guess {todayInfo} {apiRoot} />
-  {:catch error}
-    <p class="error">{describeError(error)}</p>
-  {/await}
-  <Faq />
+  {#if route.gameStarted}
+    <div class="page" hidden={route.topPuzzle !== null}>
+      <Game {apiRoot} />
+      <Faq />
+    </div>
+  {/if}
+  {#if route.topPuzzle !== null}
+    <Top1000 {apiRoot} puzzle={route.topPuzzle} />
+  {/if}
 </main>
 <Footer />
 
 <style>
-  main {
+  .page {
     display: grid;
     gap: 2em;
+  }
+
+  .page[hidden] {
+    display: none;
   }
 </style>
