@@ -1,6 +1,7 @@
 <script lang="ts">
   import Result from "./Result.svelte";
   import Summary from "./Summary.svelte";
+  import { ApiError, describeError, request } from "../api";
   import type {
     GuessEntry,
     GuessKind,
@@ -14,6 +15,7 @@
   let guesses: GuessEntry[] = $state([]);
   let word = $state("");
   let errorMessage = $state("");
+  let pending = $state(false);
   let container: HTMLDivElement;
   let input: HTMLInputElement;
 
@@ -28,9 +30,27 @@
     guesses.push({ ...result, kind, guessNumber: guesses.length + 1 });
   }
 
+  async function run(action: () => Promise<void>) {
+    if (pending) {
+      return;
+    }
+
+    pending = true;
+    errorMessage = "";
+    try {
+      await action();
+    } catch (error) {
+      errorMessage = describeError(error);
+    } finally {
+      pending = false;
+    }
+  }
+
   async function onWordSubmit(event: SubmitEvent) {
     event.preventDefault();
-    errorMessage = "";
+    if (pending) {
+      return;
+    }
 
     const guess = word.trim().toLowerCase().normalize("NFC");
     word = "";
@@ -44,22 +64,23 @@
       return;
     }
 
-    const response = await fetch(`${apiRoot}/guess`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        word: guess,
-        puzzleNumber: todayInfo.puzzleNumber,
-      }),
+    await run(async () => {
+      try {
+        const result = await request<GuessResult>(apiRoot, "/guess", {
+          word: guess,
+          puzzleNumber: todayInfo.puzzleNumber,
+        });
+        addGuess(result, "guess");
+      } catch (error) {
+        const retryable = !(
+          error instanceof ApiError && [404, 422].includes(error.status)
+        );
+        if (retryable && word === "") {
+          word = guess;
+        }
+        throw error;
+      }
     });
-
-    if (response.ok) {
-      addGuess(await response.json(), "guess");
-    } else if (response.status === 404) {
-      errorMessage = "Ordet finnes ikke/er fjernet fra ordlisten";
-    } else {
-      errorMessage = "Noe gikk galt! Prøv igjen senere";
-    }
 
     input.focus();
   }
@@ -72,38 +93,27 @@
       return;
     }
 
-    const response = await fetch(`${apiRoot}/hint`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    await run(async () => {
+      const result = await request<GuessResult>(apiRoot, "/hint", {
         puzzleNumber: todayInfo.puzzleNumber,
         bestGuess: sortedGuesses[0].word,
-      }),
+      });
+      addGuess(result, "hint");
     });
-
-    if (response.ok) {
-      addGuess(await response.json(), "hint");
-    } else {
-      errorMessage = "Noe gikk galt! Prøv igjen senere";
-    }
 
     container.scrollIntoView();
   }
 
   async function onSurrender(event: SubmitEvent) {
     event.preventDefault();
-    errorMessage = "";
 
-    const response = await fetch(
-      `${apiRoot}/surrender?puzzle=${todayInfo.puzzleNumber}`,
-      { headers: { "Content-Type": "application/json" } },
-    );
-
-    if (response.ok) {
-      addGuess(await response.json(), "surrender");
-    } else {
-      errorMessage = "Noe gikk galt! Prøv igjen senere";
-    }
+    await run(async () => {
+      const result = await request<GuessResult>(
+        apiRoot,
+        `/surrender?puzzle=${todayInfo.puzzleNumber}`,
+      );
+      addGuess(result, "surrender");
+    });
 
     container.scrollIntoView();
   }
@@ -129,7 +139,7 @@
       class="submitButton guessButton"
       type="submit"
       value="Gjett"
-      disabled={hasCompleted}
+      disabled={hasCompleted || pending}
     />
   </form>
 
@@ -146,10 +156,20 @@
   {#if hasGuessed && !hasCompleted}
     <div id="hintSurrender">
       <form onsubmit={onHintSubmit}>
-        <input class="submitButton" type="submit" value="Hint" />
+        <input
+          class="submitButton"
+          type="submit"
+          value="Hint"
+          disabled={pending}
+        />
       </form>
       <form onsubmit={onSurrender}>
-        <input class="submitButton" type="submit" value="Gi opp" />
+        <input
+          class="submitButton"
+          type="submit"
+          value="Gi opp"
+          disabled={pending}
+        />
       </form>
     </div>
   {/if}
@@ -185,12 +205,6 @@
   .guessButton {
     flex: 1;
     font-size: 1.25rem;
-  }
-  .error {
-    background-color: rgb(245, 110, 110);
-    padding: 1em;
-    border: red solid 2px;
-    color: black;
   }
   #hintSurrender {
     display: flex;

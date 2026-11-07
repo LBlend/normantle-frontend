@@ -92,6 +92,13 @@ a:hover {
   color: #ffcc66;
 }
 
+.error {
+  background-color: rgb(245, 110, 110);
+  padding: 1em;
+  border: red solid 2px;
+  color: black;
+}
+
 @media screen and (max-width: 600px) {
   body {
     padding-inline: 1em;

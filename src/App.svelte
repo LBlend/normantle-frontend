@@ -4,28 +4,24 @@
   import Guess from "./components/Guess.svelte";
   import Faq from "./components/Faq.svelte";
   import Footer from "./components/Footer.svelte";
+  import { describeError, request } from "./api";
   import type { TodayInfoType } from "./types/TodayInfo";
 
   const apiRoot = import.meta.env.API_ROOT || "http://127.0.0.1:5000";
 
-  let todayInfo: TodayInfoType = $state({
-    puzzleNumber: 0,
-    similarity: 0,
-    similarityTenth: 0,
-    similarityThousandth: 0,
-  });
-
-  fetch(`${apiRoot}/today`)
-    .then((response) => response.json())
-    .then((data: TodayInfoType) => {
-      todayInfo = data;
-    });
+  const today = request<TodayInfoType>(apiRoot, "/today");
 </script>
 
 <Header />
 <main>
-  <TodayInfo {todayInfo} />
-  <Guess {todayInfo} {apiRoot} />
+  {#await today}
+    <p>Henter dagens ord…</p>
+  {:then todayInfo}
+    <TodayInfo {todayInfo} />
+    <Guess {todayInfo} {apiRoot} />
+  {:catch error}
+    <p class="error">{describeError(error)}</p>
+  {/await}
   <Faq />
 </main>
 <Footer />
