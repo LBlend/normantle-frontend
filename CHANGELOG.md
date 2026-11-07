@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/LBlend/normantle-frontend/compare/v1.2.0...v1.3.0) (2026-11-07)
+
+
+### Features
+
+* keep focus in the guess field after a hint and move hint buttons below it ([875d0fb](https://github.com/LBlend/normantle-frontend/commit/875d0fb7f229e5a220a2e88bc36f87b4a7de7fce))
+
 ## [1.2.0](https://github.com/LBlend/normantle-frontend/compare/v1.1.0...v1.2.0) (2026-11-07)
 
 
